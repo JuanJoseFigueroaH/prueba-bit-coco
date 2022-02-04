@@ -102,7 +102,8 @@
                 adModal:0,
                 adAccion:0,
                 adNombre:'',
-                adId:''
+                adId:'',
+                productoServer:[]
             }
         },
         computed: {
@@ -182,7 +183,12 @@
                         me.listar();
                     })
                     .catch(function(error){
-                        console.log(error);
+                        me.productoServer.push({
+                            'producto':me.producto,
+                            'cantidad':me.cantidad,
+                            'user':me.$store.state.usuario.id,
+                        });
+                        localStorage.setItem("producto", JSON.stringify(me.productoServer));
                     });
                 }
             },
